@@ -1,0 +1,47 @@
+﻿
+@model IvoRakar.ViewModels.SubscriberViewModel
+
+@{
+    AjaxOptions options = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        OnBegin = "OnSubmitBegin()",
+        OnComplete = "OnSubmitComplete()",
+        //OnFailure = "OnSubmitFailure()",
+        //OnSuccess = "OnSubmitSuccess()",
+        LoadingElementId = "divProgress",
+        LoadingElementDuration = 1000,
+        UpdateTargetId = Model.ContentHtmlId,
+        InsertionMode = InsertionMode.Replace
+    };
+}
+
+<div class="jumbotron">
+    <h1>Ivo Rakar</h1>
+    <p class="lead">You can find out more about me on my Linked-in profile by following the link below.</p>
+    <p><a href="http://www.linkedin.com/in/ivo-rakar-32ab95113" class="btn btn-primary btn-lg" target="_blank">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</h2>
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+             when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged. 
+            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+    <div class="col-md-6">
+        <h2>Subscribe to our newsletter</h2>
+        @using (Ajax.BeginForm("Subscribe", "Home", options, new { @id = @Model.ContentHtmlId }))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Partial("_FormFields", Model);
+        }
+    </div>
+</div>
